@@ -1,7 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Upload File</title>
 </head>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-
 <body>
+    <div class="navigation-buttons">
+        <a href="/" class="button">Home</a>
+        <a href="/view" class="button">View Files</a>
+    </div>
+
     <h1>Upload a File</h1>
     
     <div class="form-container">
@@ -17,7 +27,6 @@
             <br><br>
             <button type="submit">Submit</button>
         </form>
-        <a href="/">Back</a>
     </div>
 </body>
 </html>

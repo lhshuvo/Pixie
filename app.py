@@ -79,14 +79,11 @@ def process_file(filename):
     df["valid_email"] = mail_validation
     df["Response_Type"] = responsess
 
-    # Create the 'processed' directory if it doesn't exist
     os.makedirs(app.config['PROCESSED_FOLDER'], exist_ok=True)
 
-    # Determine the processed file path
     processed_filename = filename.rsplit('.', 1)[0] + '_processed.' + filename.rsplit('.', 1)[1]
     processed_output_path = os.path.join(app.config['PROCESSED_FOLDER'], processed_filename)
 
-    # Write the DataFrame to an Excel file with a new sheet for processed data
     with pd.ExcelWriter(processed_output_path, engine='openpyxl') as writer:
         if filename.lower().endswith('.csv') or filename.lower().endswith('.json'):
             df.to_excel(writer, sheet_name='ProcessedData', index=False)
@@ -108,8 +105,6 @@ def process_file(filename):
         "request_errors": len(df.loc[df['valid_email'] == -1]),
     }
     return summary
-
-
 
 @app.route('/', methods=['GET'])
 def home():
@@ -142,10 +137,49 @@ def view():
     processed_files = os.listdir(app.config['PROCESSED_FOLDER'])
     return render_template('view.html', uploaded_files=uploaded_files, processed_files=processed_files)
 
-@app.route('/process/<filename>', methods=['GET'])
-def process(filename):
-    process_file(filename)
-    flash('File processed and validated successfully!')
+@app.route('/process_uploaded/<filename>', methods=['GET'])
+def process_uploaded(filename):
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+    if filename.lower().endswith('.csv'):
+        df = pd.read_csv(file_path, encoding='utf-8', decimal=',')
+    elif filename.lower().endswith('.xlsx'):
+        df = pd.read_excel(file_path)
+    elif filename.lower().endswith('.json'):
+        with open(file_path, 'r') as json_file:
+            data = json.load(json_file)
+        df = pd.DataFrame(data)
+
+    mail_validation, responsess = validate_emails(df)
+
+    df["valid_email"] = mail_validation
+    df["Response_Type"] = responsess
+
+    os.makedirs(app.config['PROCESSED_FOLDER'], exist_ok=True)
+
+    processed_filename = filename.rsplit('.', 1)[0] + '_processed.' + filename.rsplit('.', 1)[1]
+    processed_output_path = os.path.join(app.config['PROCESSED_FOLDER'], processed_filename)
+
+    with pd.ExcelWriter(processed_output_path, engine='openpyxl') as writer:
+        if filename.lower().endswith('.csv') or filename.lower().endswith('.json'):
+            df.to_excel(writer, sheet_name='ProcessedData', index=False)
+        elif filename.lower().endswith('.xlsx'):
+            df.to_excel(writer, sheet_name='ProcessedData', index=False)
+            summary_df = pd.DataFrame({
+                'Total data': [len(df)],
+                'Total email validated': [len(df.loc[df['valid_email'] == 1])],
+                'Total email could not validated': [len(df.loc[df['valid_email'] == 0])],
+                'Total no of errors': [len(df.loc[df['valid_email'] == -1])],
+            })
+            summary_df.to_excel(writer, sheet_name='Summary', index=False)
+
+    summary = {
+        "filename": processed_filename,
+        "total": len(df),
+        "valid_emails": len(df.loc[df['valid_email'] == 1]),
+        "invalid_emails": len(df.loc[df['valid_email'] == 0]),
+        "request_errors": len(df.loc[df['valid_email'] == -1]),
+    }
     return redirect('/view')
 
 @app.route('/delete/<filename>', methods=['GET'])
@@ -163,7 +197,6 @@ def delete(filename):
 
     return redirect('/view')
 
-
 @app.route('/download/uploaded/<filename>', methods=['GET'])
 def download_uploaded_file(filename):
     uploaded_file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -179,7 +212,6 @@ def download_processed_file(filename):
         return send_from_directory(app.config['PROCESSED_FOLDER'], filename, as_attachment=True)
     else:
         return "File not found", 404
-
 
 if __name__ == '__main__':
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)

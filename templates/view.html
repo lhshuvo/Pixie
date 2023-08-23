@@ -1,53 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>View Files</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-
-        h1 {
-            color: #333;
-            padding: 20px;
-        }
-
-        .list-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            text-align: left;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 10px;
-        }
-
-        .file-link, .button-link {
-            text-decoration: none;
-            color: #333;
-            transition: color 0.3s;
-        }
-
-        .file-link:hover, .button-link:hover {
-            color: #555;
-        }
-
-        .file-actions {
-            margin-left: 10px;
-        }
-    </style>
 </head>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
 <body>
     <h1>View Files</h1>
     

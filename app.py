@@ -163,10 +163,23 @@ def delete(filename):
 
     return redirect('/view')
 
-@app.route('/download/<filename>', methods=['GET'])
-def download(filename):
+
+@app.route('/download/uploaded/<filename>', methods=['GET'])
+def download_uploaded_file(filename):
+    uploaded_file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    if os.path.exists(uploaded_file_path):
+        return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
+    else:
+        return "File not found", 404
+
+@app.route('/download/processed/<filename>', methods=['GET'])
+def download_processed_file(filename):
     processed_file_path = os.path.join(app.config['PROCESSED_FOLDER'], filename)
-    return send_from_directory(app.config['PROCESSED_FOLDER'], filename, as_attachment=True)
+    if os.path.exists(processed_file_path):
+        return send_from_directory(app.config['PROCESSED_FOLDER'], filename, as_attachment=True)
+    else:
+        return "File not found", 404
+
 
 if __name__ == '__main__':
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)

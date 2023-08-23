@@ -1,6 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>View Files</title>
 </head>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-
 <body>
     <h1>View Files</h1>
     
@@ -9,11 +14,14 @@
         <ul>
             {% for file in uploaded_files %}
                 <li>
-                    <span class="file-link"><a href="/download/{{ file }}">{{ file }}</a></span>
-                    <span class="file-actions">
-                        <span class="button-link"><a href="/process/{{ file }}">Process</a></span>
-                        <span class="button-link"><a href="/delete/{{ file }}">Delete</a></span>
-                    </span>
+                    <div class="file-entry">
+                        <span class="file-link">
+                            <a href="/download/{{ file }}">{{ file }}</a>
+                            <a href="/process/{{ file }}" class="button-link">Process</a>
+                            <a href="/delete/{{ file }}" class="button-link">Delete</a>
+                            <a href="/download/{{ file }}" class="button-link">Download</a>
+                        </span>
+                    </div>
                 </li>
             {% endfor %}
         </ul>
@@ -21,10 +29,13 @@
         <ul>
             {% for file in processed_files %}
                 <li>
-                    <span class="file-link"><a href="/download/{{ file }}">{{ file }}</a></span>
-                    <span class="file-actions">
-                        <span class="button-link"><a href="/delete/{{ file }}">Delete</a></span>
-                    </span>
+                    <div class="file-entry">
+                        <span class="file-link">
+                            <a href="/download/{{ file }}">{{ file }}</a>
+                            <a href="/delete/{{ file }}" class="button-link">Delete</a>
+                            <a href="/download/{{ file }}" class="button-link">Download</a>
+                        </span>
+                    </div>
                 </li>
             {% endfor %}
         </ul>

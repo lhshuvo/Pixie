@@ -1,0 +1,139 @@
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            padding: 20px;
+        }
+
+        .button {
+            text-decoration: none;
+            font-size: 20px;
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #ccc;
+        }
+
+ body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            padding: 20px;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        label {
+            font-size: 18px;
+        }
+
+        input[type="file"], select {
+            border: 1px solid #ccc;
+            padding: 5px;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="file"]:hover, select:hover {
+            border-color: #aaa;
+        }
+
+        button[type="submit"] {
+            font-size: 18px;
+            padding: 8px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #555;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            margin-top: 10px;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #555;
+        }
+ body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            padding: 20px;
+        }
+
+        .list-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .file-link, .button-link {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        .file-link:hover, .button-link:hover {
+            color: #555;
+        }
+
+        .file-actions {
+            margin-left: 10px;
+        }
+  

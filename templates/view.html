@@ -7,6 +7,11 @@
     <title>View Files</title>
 </head>
 <body>
+    <div class="navigation-buttons">
+        <a href="/" class="button">Home</a>
+        <a href="/upload" class="button">Upload File</a>
+    </div>
+
     <h1>View Files</h1>
     
     <div class="list-container">
@@ -16,10 +21,9 @@
                 <li>
                     <div class="file-entry">
                         <span class="file-link">
-                            <a href="/download/{{ file }}">{{ file }}</a>
-                            <a href="/process/{{ file }}" class="button-link">Process</a>
+                            <a href="/download/uploaded/{{ file }}">{{ file }}</a>
                             <a href="/delete/{{ file }}" class="button-link">Delete</a>
-                            <a href="/download/{{ file }}" class="button-link">Download</a>
+                            <a href="/download/uploaded/{{ file }}" class="button-link">Download</a>
                         </span>
                     </div>
                 </li>
@@ -31,15 +35,14 @@
                 <li>
                     <div class="file-entry">
                         <span class="file-link">
-                            <a href="/download/{{ file }}">{{ file }}</a>
+                            <a href="/download/processed/{{ file }}">{{ file }}</a>
                             <a href="/delete/{{ file }}" class="button-link">Delete</a>
-                            <a href="/download/{{ file }}" class="button-link">Download</a>
+                            <a href="/download/processed/{{ file }}" class="button-link">Download</a>
                         </span>
                     </div>
                 </li>
             {% endfor %}
         </ul>
-        <a href="/">Back</a>
     </div>
 </body>
 </html>
